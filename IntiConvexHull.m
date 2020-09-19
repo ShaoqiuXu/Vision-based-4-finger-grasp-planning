@@ -1,0 +1,35 @@
+function [Jaco,NVer,NTP,JCen]=IntiConvexHull(G,rou)
+J1=G(1,:);
+J2=G(2,:);
+J3=G(3,:)/rou;
+Jaco=[J1;J2;J3];
+Jac1=Jaco(:,1);
+Jac2=Jaco(:,2);
+Jac3=Jaco(:,3);
+Jac4=Jaco(:,4);
+
+JCen = (Jac1+Jac2+Jac3+Jac4)/2;
+Jac1 = Jac1/2;
+Jac2 = Jac2/2;
+Jac3 = Jac3/2;
+Jac4 = Jac4/2;
+Jaco =[ Jac1, Jac2, Jac3, Jac4];
+
+Ver31=[Jac1,Jac2,Jac3]*[ 1; 1; 1]; 
+Ver32=[Jac1,Jac2,Jac3]*[-1; 1; 1]; 
+Ver33=[Jac1,Jac2,Jac3]*[-1;-1; 1]; 
+Ver34=[Jac1,Jac2,Jac3]*[ 1;-1; 1]; 
+Ver35=[Jac1,Jac2,Jac3]*[ 1; 1;-1];
+Ver36=[Jac1,Jac2,Jac3]*[-1; 1;-1]; 
+Ver37=[Jac1,Jac2,Jac3]*[-1;-1;-1]; 
+Ver38=[Jac1,Jac2,Jac3]*[ 1;-1;-1]; 
+T_v1=[Ver32, Ver35, Ver34]; 
+T_v2=[Ver31, Ver36, Ver33]; 
+T_v3=[Ver32, Ver37, Ver34]; 
+T_v4=[Ver31, Ver33, Ver38]; 
+T_v5=[Ver31, Ver38, Ver36]; 
+T_v6=[Ver32, Ver35, Ver37]; 
+T_v7=[Ver33, Ver36, Ver38]; 
+T_v8=[Ver34, Ver37, Ver35]; 
+NVer={ Ver31, Ver32, Ver33, Ver34, Ver35, Ver36, Ver37, Ver38};
+ NTP={  T_v1,  T_v2,  T_v3,  T_v4,  T_v5,  T_v6,  T_v7,  T_v8};
